@@ -1,35 +1,31 @@
-var passwordbox = document.getElementById("fpass");
-var tam = 16;
-
+var PasswordBox = document.getElementById("fpass");
 var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var lowerCase = "abcdefghijklmnopqrstuvwxyz";
-var number = "0123456789";
-var symbol = "@#$%*()+._~|{}[]<>/-=;";
+var lowerCase = "abcdefghijklmnopqrstuvwxyz"; 
+var number = "0123456789"; 
+var symbols = "@#$%*()+._~|{}[]<>/-=;";
+var tam = 16;
+var all = upperCase + lowerCase + number + symbols;
 
-var all = upperCase + lowerCase + number + symbol
+var getRandomCharacter = characters => characters[Math.floor(Math.random() * characters.length)]
 
 function createPass(){
-   
-    var password = "";
-    password += upperCase[Math.floor(Math.random() * upperCase.length)];
-    password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
-    password += number[Math.floor(Math.random() *  number.length)];
-    password += symbol[Math.floor(Math.random() *  symbol.length)];
+    var requiredChars = [
+        getRandomCharacter(upperCase),
+        getRandomCharacter(lowerCase),
+        getRandomCharacter(number),
+        getRandomCharacter(symbols)
+    ];
+
+    var password = requiredChars.join("");
 
     while(tam > password.length){
-        password += all[Math.floor(Math.random() *  all.length)];
+        password += getRandomCharacter(all);
     }
-    passwordbox.value = password;
 
-
+    PasswordBox.value = password;
 }
 
-function copyPass(){
-    passwordbox.select()
+var copyPass = () =>{
+    PasswordBox.select();
     document.execCommand("copy");
 }
-
-
-
-
-
